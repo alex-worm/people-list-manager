@@ -2,15 +2,15 @@ import React, {useContext} from 'react';
 import {PersonContext} from '../context/PersonContext';
 import {useHttp} from '../hooks/http.hook';
 
-export const PeopleList = ({people, update}) => {
+const PeopleList = ({people, update}) => {
     const person = useContext(PersonContext);
     const name = person.name.toLowerCase();
-    const age = person.age.toLowerCase();
+    const age = person.age;
     const {request} = useHttp();
 
     const clickHandler = async id => {
         try {
-            const data = await request(`/api/person/delete${id}`, 'DELETE', {id: id});
+            await request(`/api/person/delete${id}`, 'DELETE', {id: id});
 
             update();
         } catch (e) {
@@ -57,3 +57,5 @@ export const PeopleList = ({people, update}) => {
         </table>
     );
 };
+
+export default PeopleList;

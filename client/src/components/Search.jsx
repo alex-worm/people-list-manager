@@ -1,30 +1,34 @@
 import React, {useContext} from 'react';
 import {useHttp} from '../hooks/http.hook';
 import {PersonContext} from '../context/PersonContext';
+import {useMessage} from '../hooks/message.hook';
 
 export const Search = ({update}) => {
     const {request} = useHttp();
+    const message = useMessage();
 
     const person = useContext(PersonContext);
 
-    const clickHandler = async event => {
+    const clickHandler = async () => {
         try {
-            if (Number.isNaN(person.age)) return;
-
-            const data = await request('/api/person/create', 'POST', {name: person.name, age: person.age});
+            if (!Number(person.age)) {
+                message('Age is NaN');
+                return;
+            }
+            await request('/api/person/create', 'POST', {name: person.name, age: person.age});
             person.setName('');
             person.setAge('');
 
             update();
             window.M.updateTextFields();
         } catch (e) {
-
+            message(e);
         }
     };
 
     return (
         <div className="row container valign-wrapper">
-            <div className="input-field col s8">
+            <div className="input-field col s6 m8">
                 <input className="validate"
                        id="name"
                        type="text"
@@ -32,7 +36,7 @@ export const Search = ({update}) => {
                        onChange={event => person.setName(event.target.value)}/>
                 <label htmlFor="name">Enter name</label>
             </div>
-            <div className="input-field col s2">
+            <div className="input-field col s4 m2">
                 <input className="validate"
                        id="age"
                        type="text"
