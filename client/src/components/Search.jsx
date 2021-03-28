@@ -44,7 +44,9 @@ export const Search = ({update}) => {
                        onChange={event => person.setAge(event.target.value)}/>
                 <label htmlFor="age">Enter age</label>
             </div>
-            <button className="waves-effect waves-light btn col s2" onClick={clickHandler}>add</button>
+            <div className="col s3 m2">
+                <button className="waves-effect waves-light btn col s12" onClick={clickHandler}>add</button>
+            </div>
         </div>
     );
 };

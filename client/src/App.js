@@ -8,7 +8,7 @@ function App() {
 
     return (
         <Router>
-            <div className='container center'>
+            <div className="container center">
                 {routes}
             </div>
         </Router>

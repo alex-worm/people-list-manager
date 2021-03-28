@@ -1,8 +1,10 @@
 import React from 'react';
 import {useHttp} from '../hooks/http.hook';
+import {useMessage} from '../hooks/message.hook';
 
 const PeopleList = ({people, update}) => {
     const {request} = useHttp();
+    const message = useMessage();
 
     const clickHandler = async id => {
         try {
@@ -10,22 +12,22 @@ const PeopleList = ({people, update}) => {
 
             update();
         } catch (e) {
-
+            message(e);
         }
     };
 
     if (!people.length) {
-        return <p className="center col s12">No people yet</p>;
+        return <p className="flow-text">No people yet</p>;
     }
 
     return (
         <table className="striped container">
             <thead>
             <tr>
-                <th>#</th>
-                <th>Name</th>
-                <th>Age</th>
-                <th className="right">Delete</th>
+                <th style={{width: '10%'}}>#</th>
+                <th style={{width: '50%'}}>Name</th>
+                <th style={{width: '30%'}}>Age</th>
+                <th style={{width: '10%'}}>Delete</th>
             </tr>
             </thead>
 
@@ -36,8 +38,8 @@ const PeopleList = ({people, update}) => {
                         <td>{index + 1}</td>
                         <td>{person.name}</td>
                         <td>{person.age}</td>
-                        <td className="right">
-                            <button className="waves-effect waves-light btn col s2"
+                        <td>
+                            <button className="waves-effect waves-light btn"
                                     onClick={() => clickHandler(person._id)}>delete
                             </button>
                         </td>
