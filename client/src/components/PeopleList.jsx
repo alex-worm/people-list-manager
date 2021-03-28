@@ -17,7 +17,7 @@ const PeopleList = ({people, update}) => {
     };
 
     if (!people.length) {
-        return <p className="flow-text">No people yet</p>;
+        return null;
     }
 
     return (

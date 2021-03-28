@@ -75,7 +75,7 @@ export const PeoplePage = () => {
 
     return (
         <PersonContext.Provider value={{name, age, setName, setAge}}>
-            <Search update={() => setUpdate(prevState => !prevState)}/>
+            <Search count={sortedPeople.length} update={() => setUpdate(prevState => !prevState)}/>
             <PeopleList people={sortedPeople.slice(0, elCount)} update={() => setUpdate(prevState => !prevState)}/>
         </PersonContext.Provider>
     );
