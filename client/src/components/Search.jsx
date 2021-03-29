@@ -49,7 +49,7 @@ export const Search = ({count, update}) => {
                     <button className="waves-effect waves-light btn col s12" onClick={clickHandler}>add</button>
                 </div>
             </div>
-            <div className="row left-align flow-text    ">Founded {count} records</div>
+            <div className="row left-align flow-text">Found {count} records</div>
         </div>
     );
 };
