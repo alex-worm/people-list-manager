@@ -11,8 +11,8 @@ export const Search = ({count, update}) => {
 
     const clickHandler = async () => {
         try {
-            if (!Number(person.age)) {
-                message('Age is NaN');
+            if (!person.name || !Number(person.age) || Number(person.name)) {
+                message('Incorrect input');
                 return;
             }
             await request('/api/person/create', 'POST', {name: person.name, age: person.age});
